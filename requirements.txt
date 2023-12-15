@@ -1,0 +1,6 @@
+streamlit
+selenium
+matplotlib
+tensorflow
+keras
+mnist
