@@ -17,6 +17,7 @@ HEIGTH_FACTOR = 0.2
 WIDTH_FACTOR = 0.2
 
 # Function to create the model
+@st.cache
 def create_model():
     model = tf.keras.Sequential([
         layers.Resizing(IMG_SIZE, IMG_SIZE),
