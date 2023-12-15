@@ -4,6 +4,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
+import matplotlib.image as mpimg
 from tensorflow.keras import layers, optimizers
 from tensorflow.keras.utils import image_dataset_from_directory
 from sklearn.metrics import confusion_matrix, classification_report
@@ -52,6 +53,54 @@ def get_predictions(model, dataset):
 # Streamlit App
 def main():
     st.title("Image Classification with Streamlit")
+
+    number_classes = {'Cat': len(os.listdir('datasets/cats/')),
+    'Dog': len(os.listdir('datasets/dogs/')),
+    'Elephant': len(os.listdir('datasets/elephants/')),
+    'Giraffe': len(os.listdir('datasets/giraffes/')),
+    'Rabbit': len(os.listdir('datasets/rabbits/'))}
+
+    st.bar_chart(number_classes)
+    st.title("Number of Images by Class");
+    st.xlabel('Class Name');
+    st.ylabel('Number of Images');
+    
+    base_path = "datasets"
+
+    # Get a list of subdirectories excluding 'test_set' and 'training_set'
+    subdirectories = [folder for folder in os.listdir(base_path) if os.path.isdir(os.path.join(base_path, folder))
+                    and folder not in ['test_set', 'training_set']]
+
+    # Collect image paths
+    images = []
+    for folder in subdirectories:
+        folder_path = os.path.join(base_path, folder)
+        image_paths = [os.path.join(folder_path, image) for image in os.listdir(folder_path)]
+        images.extend(image_paths)
+
+    # Shuffle the images
+    random.shuffle(images)
+
+    # Create Streamlit figure
+    fig, axs = plt.subplots(len(subdirectories), 4, figsize=(15, 9))
+    plt.axis('off')
+
+    n = 0
+    for i, folder in enumerate(subdirectories):
+        folder_path = os.path.join(base_path, folder)
+        
+        # Select four random images from the current folder
+        folder_images = [img for img in images if folder in img]
+        selected_images = random.sample(folder_images, min(4, len(folder_images)))
+
+        for img_path in selected_images:
+            n += 1
+            img = mpimg.imread(img_path)
+            axs[i, n % 4].imshow(img)
+            axs[i, n % 4].axis('off')
+
+    # Show the Streamlit figure
+    st.pyplot(fig)
 
     # Set the parameters for your data
     batch_size = 16
