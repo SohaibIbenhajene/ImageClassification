@@ -153,6 +153,8 @@ def main():
         model = create_model()
         history = model.fit(training_set, validation_data=validation_set, steps_per_epoch=10, epochs=epochs)
 
+        st.title("Results after training model")
+
         # Display training history
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
         ax1.plot(history.history['loss'], label='training loss')
