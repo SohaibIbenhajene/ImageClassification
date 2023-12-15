@@ -61,7 +61,7 @@ def main():
     'Giraffe': len(os.listdir('datasets/giraffes/')),
     'Rabbit': len(os.listdir('datasets/rabbits/'))}
 
-    st.bar_chart(number_classes, x='Class Name', y='Number of Images')
+    st.bar_chart(number_classes, x="Class Name", y="Number of Images")
     
     base_path = "datasets"
 
