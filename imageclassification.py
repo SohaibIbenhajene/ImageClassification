@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import matplotlib.image as mpimg
+import pandas as pd
 from tensorflow.keras import layers, optimizers
 from tensorflow.keras.utils import image_dataset_from_directory
 from sklearn.metrics import confusion_matrix, classification_report
@@ -61,7 +62,11 @@ def main():
     'Giraffe': len(os.listdir('datasets/giraffes/')),
     'Rabbit': len(os.listdir('datasets/rabbits/'))}
 
-    st.bar_chart(number_classes, x="Class Name", y="Number of Images")
+    # Convert dictionary to a DataFrame for easy labeling
+    df = pd.DataFrame(list(number_classes.items()), columns=['Class Name', 'Number of Images'])
+
+    # Create a Streamlit bar chart with custom labels
+    st.bar_chart(df.set_index('Class Name'), use_container_width=True)
     
     base_path = "datasets"
 
