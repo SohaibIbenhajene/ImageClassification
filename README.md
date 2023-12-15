@@ -1,1 +1,1 @@
-# This repository is for the CyptoArithmeticPuzzle task I had to make for the Artificial Intelligence course.
+This repository is for the Image Classification task I had to make for the Artificial Intelligence course.
