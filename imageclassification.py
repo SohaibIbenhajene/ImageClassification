@@ -3,6 +3,7 @@ import os
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import tensorflow as tf
 import matplotlib.image as mpimg
 from tensorflow.keras import layers, optimizers
@@ -60,11 +61,13 @@ def main():
     'Giraffe': len(os.listdir('datasets/giraffes/')),
     'Rabbit': len(os.listdir('datasets/rabbits/'))}
 
-    st.bar_chart(number_classes)
+    df = pd.DataFrame(list(number_classes.items()), columns=['Class Name', 'Number of Images'])
+    # Add title and labels using st.text
+    # Create a Streamlit bar chart
+    st.bar_chart(df.set_index('Class Name'))
+
     # Add title and labels using st.text
     st.text("Number of Images by Class")
-    st.text('Class Name')
-    st.text('Number of Images')
     
     base_path = "datasets"
 
