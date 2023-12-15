@@ -4,3 +4,4 @@ matplotlib
 tensorflow
 keras
 mnist
+scikit-learn
