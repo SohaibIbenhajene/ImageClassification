@@ -3,7 +3,6 @@ import os
 import random
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 import tensorflow as tf
 import matplotlib.image as mpimg
 from tensorflow.keras import layers, optimizers
@@ -55,19 +54,17 @@ def get_predictions(model, dataset):
 def main():
     st.title("Image Classification with Streamlit")
 
+    st.write("Number of Images by Class")
     number_classes = {'Cat': len(os.listdir('datasets/cats/')),
     'Dog': len(os.listdir('datasets/dogs/')),
     'Elephant': len(os.listdir('datasets/elephants/')),
     'Giraffe': len(os.listdir('datasets/giraffes/')),
     'Rabbit': len(os.listdir('datasets/rabbits/'))}
 
-    df = pd.DataFrame(list(number_classes.items()), columns=['Class Name', 'Number of Images'])
+    st.bar_chart(number_classes)
     # Add title and labels using st.text
-    # Create a Streamlit bar chart
-    st.bar_chart(df.set_index('Class Name'))
-
-    # Add title and labels using st.text
-    st.text("Number of Images by Class")
+    st.x('Class Name')
+    st.y('Number of Images')
     
     base_path = "datasets"
 
