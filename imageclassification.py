@@ -106,50 +106,50 @@ def main():
     # Show the Streamlit figure
     st.pyplot(fig)
 
-    # Set the parameters for your data
-    batch_size = 16
-    image_size = (64, 64)
-    validation_split = 0.2
-
-    # Create the training dataset from the 'train' directory
-    training_set = image_dataset_from_directory(
-        directory='datasets/training_set',
-        labels='inferred',
-        label_mode='categorical',
-        batch_size=batch_size,
-        image_size=image_size,
-        validation_split=validation_split,
-        subset='training',
-        seed=123
-    )
-
-    # Create the validation dataset from the 'train' directory
-    validation_set = image_dataset_from_directory(
-        directory='datasets/training_set',
-        labels='inferred',
-        label_mode='categorical',
-        batch_size=batch_size,
-        image_size=image_size,
-        validation_split=validation_split,
-        subset='validation',
-        seed=123
-    )
-
-    # Create the testing dataset from the 'test' directory
-    test_set = image_dataset_from_directory(
-        directory='datasets/test_set',
-        labels='inferred',
-        label_mode='categorical',
-        batch_size=batch_size,
-        image_size=image_size
-    )
-
     # Sidebar
     st.sidebar.header("Model Configuration")
     epochs = st.sidebar.slider("Select the number of epochs", 1, 20, 10)
     train_button = st.sidebar.button("Train Model")
 
     if train_button:
+        # Set the parameters for your data
+        batch_size = 16
+        image_size = (64, 64)
+        validation_split = 0.2
+
+        # Create the training dataset from the 'train' directory
+        training_set = image_dataset_from_directory(
+            directory='datasets/training_set',
+            labels='inferred',
+            label_mode='categorical',
+            batch_size=batch_size,
+            image_size=image_size,
+            validation_split=validation_split,
+            subset='training',
+            seed=123
+        )
+
+        # Create the validation dataset from the 'train' directory
+        validation_set = image_dataset_from_directory(
+            directory='datasets/training_set',
+            labels='inferred',
+            label_mode='categorical',
+            batch_size=batch_size,
+            image_size=image_size,
+            validation_split=validation_split,
+            subset='validation',
+            seed=123
+        )
+
+        # Create the testing dataset from the 'test' directory
+        test_set = image_dataset_from_directory(
+            directory='datasets/test_set',
+            labels='inferred',
+            label_mode='categorical',
+            batch_size=batch_size,
+            image_size=image_size
+        )
+
         # Create and train the model
         model = create_model()
         history = model.fit(training_set, validation_data=validation_set, steps_per_epoch=10, epochs=epochs)
