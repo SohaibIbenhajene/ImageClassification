@@ -174,7 +174,7 @@ def main():
 
         # Evaluate the model on the test set
         test_loss, test_acc = model.evaluate(test_set)
-        st.write(f'Test accuracy (model): {test_acc:.2%}')
+        st.write(f'Test accuracy: {test_acc:.2%}')
 
         # Get predictions on the test set
         test_predictions, test_true_labels = get_predictions(model, test_set)
@@ -187,8 +187,8 @@ def main():
         # Print classification report with labels
         class_labels = ['Cat', 'Dog', 'Elephant', 'Giraffe', 'Rabbit']
         class_report = classification_report(test_true_labels, test_predictions, target_names=class_labels)
-        st.write("\nClassification Report:")
-        st.write(class_report)
+        st.text("\nClassification Report:")
+        st.text(class_report)
 
 if __name__ == "__main__":
     main()
