@@ -61,9 +61,10 @@ def main():
     'Rabbit': len(os.listdir('datasets/rabbits/'))}
 
     st.bar_chart(number_classes)
-    st.title("Number of Images by Class");
-    st.xlabel('Class Name');
-    st.ylabel('Number of Images');
+    # Add title and labels using st.text
+    st.text("Number of Images by Class")
+    st.text('Class Name')
+    st.text('Number of Images')
     
     base_path = "datasets"
 
